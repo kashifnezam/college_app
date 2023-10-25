@@ -43,6 +43,7 @@ uploadtoFirebase(
     required String topic,
     required String link,
     required String fileName,
+    required bool isAssign,
     required File filePDF}) async {
   User? currUser = FirebaseAuth.instance.currentUser;
   // for Actual PDF File
@@ -60,6 +61,7 @@ uploadtoFirebase(
     "fileName": fileName,
     "course": course,
     "semester": sem,
+    "assignment": isAssign,
     "email": currUser?.email,
     "subject": sub,
     "uploadedTime": DateTime.now(),
@@ -67,32 +69,11 @@ uploadtoFirebase(
   }).then((value) => {Get.snackbar(fileName, "Data saved Successfully")});
 }
 
-getAllTopics() {
-  {}
+dialogueBox() {
+  Get.defaultDialog(
+    title: "Video Unavailable",
+    middleText: "Contact admin for any Query",
+    textConfirm: "Ok",
+    onConfirm: () => Get.back(),
+  );
 }
-
-// uploadToColud(String course, String sub, String fileName, File filePDF) async {
-//   // for Actual PDF File
-//   final refPDF = FirebaseStorage.instance
-//       .ref("pdf/$course/$sub/${fileName.split(".")[0]}.pdf");
-//   await refPDF.putFile(filePDF);
-//   final downLinkPDF = await refPDF.getDownloadURL();
-
-//   User? currUser = FirebaseAuth.instance.currentUser;
-//   await FirebaseFirestore.instance
-//       .collection("pdf")
-//       .doc(DateTime.now().millisecondsSinceEpoch.toString())
-//       .set({
-//     "userID": currUser?.uid,
-//     "URL": downLinkPDF,
-//     "isAdmin": false,
-//     "fileName": fileName,
-//     "course": course,
-//     "semester": sem,
-//     "email": currUser?.email,
-//     "subject": sub,
-//     "uploadedTime": DateTime.now(),
-//   }).then(
-//     (value) => debugPrint("Data Saved -----------"),
-//   );
-// }

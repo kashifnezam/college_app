@@ -23,6 +23,7 @@ class _UploadState extends State<Upload> {
   bool isC = false;
   bool isSem = false;
   bool isSub = false;
+  bool isAssignment = false;
   late List files;
 
   List questions = [
@@ -608,6 +609,31 @@ class _UploadState extends State<Upload> {
             const SizedBox(
               height: 15,
             ),
+            //  switch for Assignments
+            Card(
+              color: Colors.deepPurple[50],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Assignments",
+                    style: GoogleFonts.alegreya(
+                        fontSize: 20, color: Colors.deepPurple.shade900),
+                  ),
+                  Switch(
+                      activeColor: Colors.green,
+                      value: isAssignment,
+                      onChanged: (value) {
+                        setState(() {
+                          isAssignment = value;
+                        });
+                      })
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             const Divider(thickness: 1),
             // --------Topic field------------
             const SizedBox(
@@ -623,11 +649,6 @@ class _UploadState extends State<Upload> {
                               MaterialStatePropertyAll(Colors.indigo[100])),
                       onPressed: () {
                         pickFilePDF();
-                        debugPrint("Button : $isButton");
-                        debugPrint("Course : $isC");
-                        debugPrint("sem : $isSem");
-                        debugPrint("sub : $isSub");
-                        debugPrint("file : $isSub");
                       },
                       child: const Text(
                         "Choose PDF only",
@@ -747,8 +768,9 @@ class _UploadState extends State<Upload> {
             sem: semValue,
             sub: subValue,
             topic: topicController.text.toString(),
-            link: linkController.text.toString(),
+            link: linkController.text.toString(), 
             fileName: files[i].name,
+            isAssign: isAssignment,
             filePDF: File(files[i].path!));
       }
     } else {
