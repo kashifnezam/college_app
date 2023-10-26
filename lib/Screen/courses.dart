@@ -21,23 +21,29 @@ class _CoursesState extends State<Courses> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.transparent,
-            labelPadding: EdgeInsets.all(10),
+            labelPadding: const EdgeInsets.all(10),
             unselectedLabelColor: Colors.grey,
             tabs: [
               Text(
                 "Topics",
+                style: GoogleFonts.nunito(),
               ),
               Text(
                 "Assignments",
+                style: GoogleFonts.nunito(),
               ),
               Text(
                 "Syllabus",
+                style: GoogleFonts.nunito(),
               ),
             ],
           ),
-          title: Text(Get.arguments[1]),
+          title: Text(
+            Get.arguments[1],
+            style: GoogleFonts.nunito(),
+          ),
         ),
         body: TabBarView(children: [
           // -------------------------1st page----------------------------------

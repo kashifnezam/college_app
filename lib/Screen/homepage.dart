@@ -1,7 +1,6 @@
 import 'package:college_app/Screen/courses.dart';
-import 'package:college_app/Screen/login.dart';
+import 'package:college_app/Screen/navbar.dart';
 import 'package:college_app/Screen/upload.dart';
-import 'package:college_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,9 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    bool isActive = FirebaseAuth.instance.currentUser != null;
-    // double sHeight = Get.height;
-    // double sWidth = Get.width;
     TabController controller = TabController(length: 2, vsync: this);
     List<Map<String, dynamic>> subject = [
       {
@@ -35,23 +31,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       {"name": "Artificial Intelligence", "syllabus": "assets/pdf/ai.pdf"},
     ];
     return Scaffold(
+      drawer: const Navbar(),
       appBar: AppBar(
-        leading: isActive
-            ? IconButton(
-                icon: const Icon(
-                  Icons.logout_rounded,
-                ),
-                onPressed: () async {
-                  await signOutGoogle();
-                  setState(() {});
-                },
-              )
-            : IconButton(
-                icon: const Icon(Icons.person_4_outlined),
-                onPressed: () {
-                  Get.to(() => const LoginGoogle());
-                },
-              ),
         centerTitle: true,
         title: const Text("MCA (Semester 3)"),
       ),
