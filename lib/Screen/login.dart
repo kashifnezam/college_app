@@ -6,9 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class LoginGoogle extends StatelessWidget {
+class LoginGoogle extends StatefulWidget {
   const LoginGoogle({super.key});
 
+  @override
+  State<LoginGoogle> createState() => _LoginGoogleState();
+}
+
+class _LoginGoogleState extends State<LoginGoogle> {
+  bool islogin = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +42,9 @@ class LoginGoogle extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
+                  setState(() {
+                    islogin = true;
+                  });
                   await signInWithGoogle().then((value) => {
                         debugPrint(value.additionalUserInfo.toString()),
                         debugPrint(value.user?.phoneNumber.toString()),
@@ -43,29 +52,35 @@ class LoginGoogle extends StatelessWidget {
                             .collection("user")
                             .doc(value.user?.uid)
                             .set({"user": value.user?.email, "isAdmin": false}),
+                        islogin = false,
                         Get.offAll(() => const HomePage()),
                       });
                 },
-                child: const Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image(
-                      fit: BoxFit.fill,
-                      height: 26,
-                      width: 26,
-                      image: AssetImage("assets/images/google.png"),
-                    ),
-                    Text(
-                      "Sign in with Google",
-                      style: TextStyle(
-                          fontFamily: "AlegreyaSans",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                  ],
-                )),
+                child: islogin
+                    ? const CircularProgressIndicator(
+                        color: Colors.deepPurple,
+                        
+                      )
+                    : const Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image(
+                            fit: BoxFit.fill,
+                            height: 26,
+                            width: 26,
+                            image: AssetImage("assets/images/google.png"),
+                          ),
+                          Text(
+                            "Sign in with Google",
+                            style: TextStyle(
+                                fontFamily: "AlegreyaSans",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 25,
+                                color: Colors.black),
+                          ),
+                        ],
+                      )),
           ),
         ],
       ),
