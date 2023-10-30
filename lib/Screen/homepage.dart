@@ -40,115 +40,120 @@ class _HomePageState extends State<HomePage> {
               textStyle: const TextStyle(letterSpacing: 1)),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-        child: ListView(
-          children: [
-            // TabBar(
-            //     labelColor: Colors.deepPurple,
-            //     unselectedLabelColor: Colors.grey,
-            //     indicatorColor: Colors.deepPurple,
-            //     automaticIndicatorColorAdjustment: true,
-            //     controller: controller,
-            //     tabs: const [
-            //       Tab(
-            //         text: "Section A",
-            //       ),
-            //       Tab(
-            //         text: "Section B",
-            //       ),
-            //     ]),
-            // Container(
-            //   margin: const EdgeInsets.all(20),
-            //   width: double.maxFinite,
-            //   height: 200,
-            //   child: TabBarView(controller: controller, children: [
-            //     Tab(
-            //       child: InteractiveViewer(
-            //         maxScale: 5.0,
-            //         minScale: 0.1,
-            //         child: Image.asset(
-            //           height: 200,
-            //           fit: BoxFit.fill,
-            //           "assets/images/mca_3A.png",
-            //         ),
-            //       ),
-            //     ),
-            //     Tab(
-            //       child: InteractiveViewer(
-            //         maxScale: 5.0,
-            //         minScale: 0.1,
-            //         child: Image.asset(
-            //           height: 200,
-            //           fit: BoxFit.fill,
-            //           "assets/images/mca_3B.png",
-            //         ),
-            //       ),
-            //     ),
-            //   ]),
-            // ),
-            // const Divider(thickness: 0.9),
-            const SizedBox(
-              height: 10,
+      body: ListView(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          // TabBar(
+          //     labelColor: Colors.deepPurple,
+          //     unselectedLabelColor: Colors.grey,
+          //     indicatorColor: Colors.deepPurple,
+          //     automaticIndicatorColorAdjustment: true,
+          //     controller: controller,
+          //     tabs: const [
+          //       Tab(
+          //         text: "Section A",
+          //       ),
+          //       Tab(
+          //         text: "Section B",
+          //       ),
+          //     ]),
+          // Container(
+          //   margin: const EdgeInsets.all(20),
+          //   width: double.maxFinite,
+          //   height: 200,
+          //   child: TabBarView(controller: controller, children: [
+          //     Tab(
+          //       child: InteractiveViewer(
+          //         maxScale: 5.0,
+          //         minScale: 0.1,
+          //         child: Image.asset(
+          //           height: 200,
+          //           fit: BoxFit.fill,
+          //           "assets/images/mca_3A.png",
+          //         ),
+          //       ),
+          //     ),
+          //     Tab(
+          //       child: InteractiveViewer(
+          //         maxScale: 5.0,
+          //         minScale: 0.1,
+          //         child: Image.asset(
+          //           height: 200,
+          //           fit: BoxFit.fill,
+          //           "assets/images/mca_3B.png",
+          //         ),
+          //       ),
+          //     ),
+          //   ]),
+          // ),
+          // const Divider(thickness: 0.9),
+          const SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text(
+              "All Subjects",
+              style: GoogleFonts.alegreyaSans(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                  decoration: TextDecoration.underline,
+                  color: Colors.deepPurple[800]),
             ),
-            Center(
-              child: Text(
-                "All Subjects",
-                style: GoogleFonts.alegreyaSans(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                    decoration: TextDecoration.underline,
-                    color: Colors.deepPurple[800]),
-              ),
+          ),
+          Card(
+            color: Colors.deepPurple[50],
+            margin: const EdgeInsets.all(20),
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              itemCount: subject.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Text(
+                    subject[index]["name"],
+                  ),
+                  trailing: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.deepPurple[500])),
+                    onPressed: () {
+                      Get.to(() => const Courses(), arguments: [
+                        subject[index]["syllabus"],
+                        subject[index]["name"]
+                      ]);
+                    },
+                    child: const Text("Click Here"),
+                  ),
+                );
+              },
             ),
-            Card(
-              color: Colors.deepPurple[50],
-              margin: const EdgeInsets.all(20),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: subject.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Text(
-                      subject[index]["name"],
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    trailing: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.deepPurple[500])),
-                      onPressed: () {
-                        Get.to(() => const Courses(), arguments: [
-                          subject[index]["syllabus"],
-                          subject[index]["name"]
-                        ]);
-                      },
-                      child: const Text("Click Here"),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            // const Text("You are now an Admin"),
-            ElevatedButton(
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          // const Text("You are now an Admin"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+            child: ElevatedButton(
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.deepPurple[800])),
               onPressed: () {
                 Get.to(() => const TimeTable());
               },
-              child: const Text(
-                "Time Table",
-                style: TextStyle(fontSize: 22),
+              child: const Padding(
+                padding: EdgeInsets.all(18.0),
+                child: Text(
+                  "Time Table",
+                  style: TextStyle(fontSize: 22),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
