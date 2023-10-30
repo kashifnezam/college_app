@@ -27,15 +27,15 @@ class _CoursesState extends State<Courses> {
             unselectedLabelColor: Colors.grey,
             tabs: [
               Text(
+                "Syllabus",
+                style: GoogleFonts.nunito(),
+              ),
+              Text(
                 "Topics",
                 style: GoogleFonts.nunito(),
               ),
               Text(
                 "Assignments",
-                style: GoogleFonts.nunito(),
-              ),
-              Text(
-                "Syllabus",
                 style: GoogleFonts.nunito(),
               ),
             ],
@@ -46,7 +46,13 @@ class _CoursesState extends State<Courses> {
           ),
         ),
         body: TabBarView(children: [
-          // -------------------------1st page----------------------------------
+          // --------------1st Page-----------------
+          Scaffold(
+            body: SfPdfViewer.asset(
+              Get.arguments[0],
+            ),
+          ),
+          // -------------------------2nd page----------------------------------
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: StreamBuilder(
@@ -108,13 +114,13 @@ class _CoursesState extends State<Courses> {
                               label: Text(
                                 "Play Video",
                                 style: GoogleFonts.alegreyaSans(
-                                    textStyle: const TextStyle(fontSize: 15),
+                                    textStyle: const TextStyle(fontSize: 12),
                                     color: Colors.black54),
                               ),
                               icon: const Icon(
                                 Icons.play_circle_filled_sharp,
                                 color: Colors.purple,
-                                size: 15,
+                                size: 12,
                               ),
                             ),
                           ),
@@ -125,7 +131,7 @@ class _CoursesState extends State<Courses> {
                           title: Text(
                             topic,
                             style: GoogleFonts.alegreya(
-                                textStyle: const TextStyle(fontSize: 20)),
+                                textStyle: const TextStyle(fontSize: 15)),
                           ),
                           trailing: ElevatedButton(
                             style: ButtonStyle(
@@ -148,7 +154,7 @@ class _CoursesState extends State<Courses> {
             ),
           ),
 
-          // 2nd page----------
+          // 3rd page----------
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: StreamBuilder(
@@ -245,12 +251,6 @@ class _CoursesState extends State<Courses> {
               },
             ),
           ),
-          // 3rd Page-----------------
-          Scaffold(
-            body: SfPdfViewer.asset(
-              Get.arguments[0],
-            ),
-          )
         ]),
       ),
     );
