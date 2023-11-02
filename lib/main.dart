@@ -9,11 +9,8 @@ Future<void> main() async {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-      
       appBarTheme: AppBarTheme(color: Colors.deepPurple[500]),
-
     ),
-    
     home: const MyApp(),
   ));
 }
@@ -26,4 +23,3 @@ class MyApp extends StatelessWidget {
     return const HomePage();
   }
 }
-

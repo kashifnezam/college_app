@@ -142,7 +142,9 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.deepPurple[800])),
               onPressed: () {
-                Get.to(() => const TimeTable());
+                Get.to(
+                  () => const TimeTable(),
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.all(18.0),

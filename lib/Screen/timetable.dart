@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TimeTable extends StatelessWidget {
+class TimeTable extends StatefulWidget {
   const TimeTable({super.key});
 
+  @override
+  State<TimeTable> createState() => _TimeTableState();
+}
+
+class _TimeTableState extends State<TimeTable> {
+  int chosenDay = 0;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     List week = [
@@ -47,8 +54,136 @@ class TimeTable extends StatelessWidget {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          for (int i = 0; i < week.length; i++)
-            dailyRoutine(week[i], subj[i], teacher),
+          // for (int i = 0; i < week.length; i++)
+          //   dailyRoutine(week[i], subj[i], teacher),
+          Container(
+            margin: const EdgeInsets.all(8),
+            width: 160,
+            decoration: BoxDecoration(color: Colors.blueGrey[50]),
+            child: Card(
+              child: Column(
+                children: [
+                  if (isSelected || chosenDay == 0)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          chosenDay = 0;
+                          isSelected = !isSelected;
+                        });
+                      },
+                      child: ElevatedButton(
+                        onPressed: (chosenDay == 0)
+                            ? () {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              }
+                            : null,
+                        child: Text(
+                          week[0],
+                          style: GoogleFonts.alegreya(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  if (isSelected || chosenDay == 1)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          chosenDay = 1;
+                          isSelected = !isSelected;
+                        });
+                      },
+                      child: ElevatedButton(
+                        onPressed: (chosenDay == 1)
+                            ? () {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              }
+                            : null,
+                        child: Text(
+                          week[1],
+                          style: GoogleFonts.alegreya(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  if (isSelected || chosenDay == 2)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          chosenDay = 2;
+                          isSelected = !isSelected;
+                        });
+                      },
+                      child: ElevatedButton(
+                        onPressed: (chosenDay == 2)
+                            ? () {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              }
+                            : null,
+                        child: Text(
+                          week[2],
+                          style: GoogleFonts.alegreya(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  if (isSelected || chosenDay == 3)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          chosenDay = 3;
+                          isSelected = !isSelected;
+                        });
+                      },
+                      child: ElevatedButton(
+                        onPressed: (chosenDay == 3)
+                            ? () {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              }
+                            : null,
+                        child: Text(
+                          week[3],
+                          style: GoogleFonts.alegreya(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  if (isSelected || chosenDay == 4)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          chosenDay = 4;
+                          isSelected = !isSelected;
+                        });
+                      },
+                      child: ElevatedButton(
+                        onPressed: (chosenDay == 4)
+                            ? () {
+                                setState(() {
+                                  isSelected = !isSelected;
+                                });
+                              }
+                            : null,
+                        child: Text(
+                          week[4],
+                          style: GoogleFonts.alegreya(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+
+          dailyRoutine(subj[chosenDay], teacher),
         ],
       )),
     );
@@ -88,18 +223,9 @@ class TimeTable extends StatelessWidget {
     );
   }
 
-  Widget dailyRoutine(String day, List sub, Map teacher) {
+  Widget dailyRoutine(sub, Map teacher) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
-          child: Text(
-            day,
-            style:
-                GoogleFonts.alegreya(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-        ),
         singleRoutine(
             sub: sub[0],
             teacher: teacher[sub[0]],
