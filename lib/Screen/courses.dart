@@ -217,7 +217,9 @@ class _CoursesState extends State<Courses> {
                                 backgroundColor:
                                     MaterialStatePropertyAll(Colors.purple[50]),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                await getAdmin();
+                              },
                               label: Text(
                                 "Solution",
                                 style: GoogleFonts.alegreyaSans(

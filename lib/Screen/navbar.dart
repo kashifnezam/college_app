@@ -52,12 +52,16 @@ class _NavbarState extends State<Navbar> {
                     ),
                   )
                 : null,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     opacity: 0.7,
-                    image: AssetImage(
-                      "assets/images/cdac.jpeg",
-                    ),
+                    image: currUser
+                        ? const AssetImage(
+                            "assets/images/cdac.jpeg",
+                          )
+                        : const AssetImage(
+                            "assets/images/cdacCollege.png",
+                          ),
                     fit: BoxFit.cover)),
           ),
           navbarItems("Time Table", const Icon(Icons.work), () {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Topics extends StatelessWidget {
   const Topics({super.key});
@@ -16,10 +16,8 @@ class Topics extends StatelessWidget {
           style: const TextStyle(fontSize: 18, letterSpacing: 2),
         ),
       ),
-      body: const PDF().cachedFromUrl(
+      body: SfPdfViewer.network(
         Get.arguments[1],
-        placeholder: (progress) => Center(child: Text('$progress %')),
-        errorWidget: (error) => Center(child: Text(error.toString())),
       ),
     );
   }

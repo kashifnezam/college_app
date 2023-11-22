@@ -762,16 +762,27 @@ class _UploadState extends State<Upload> {
       isloading = true;
     });
     if (FirebaseAuth.instance.currentUser != null) {
-      for (int i = 0; i < files.length; i++) {
-        await uploadtoFirebase(
-            course: cValue,
-            sem: semValue,
-            sub: subValue,
-            topic: topicController.text.toString(),
-            link: linkController.text.toString(), 
-            fileName: files[i].name,
-            isAssign: isAssignment,
-            filePDF: File(files[i].path!));
+      bool admin = await getAdmin();
+      if (!admin) {
+        Get.snackbar(
+          "Permission Declined",
+          "You'r not an ADMIN",
+          colorText: Colors.deepPurple,
+          backgroundColor: Colors.white70,
+          
+        );
+      } else {
+        for (int i = 0; i < files.length; i++) {
+          await uploadtoFirebase(
+              course: cValue,
+              sem: semValue,
+              sub: subValue,
+              topic: topicController.text.toString(),
+              link: linkController.text.toString(),
+              fileName: files[i].name,
+              isAssign: isAssignment,
+              filePDF: File(files[i].path!));
+        }
       }
     } else {
       Get.snackbar("Permission Declined", "Please LOGIN first");

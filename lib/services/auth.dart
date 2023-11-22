@@ -57,7 +57,6 @@ uploadtoFirebase(
       .set({
     "userID": currUser?.uid,
     "URL": downLinkPDF,
-    "isAdmin": false,
     "fileName": fileName,
     "course": course,
     "semester": sem,
@@ -76,4 +75,17 @@ dialogueBox() {
     textConfirm: "Ok",
     onConfirm: () => Get.back(),
   );
+}
+
+Future<bool> getAdmin() async {
+  bool isAdmin = false;
+  if (FirebaseAuth.instance.currentUser == null) return false;
+  String currUser = FirebaseAuth.instance.currentUser!.uid.toString();
+  final snapShot =
+      await FirebaseFirestore.instance.collection('user').doc(currUser).get();
+  if (snapShot.exists) {
+    isAdmin = snapShot.data()?['isAdmin'] ?? false;
+  }
+
+  return isAdmin;
 }
